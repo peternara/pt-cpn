@@ -22,7 +22,7 @@ def anno_transform(original, target, is_val):
         return
     
     print('The annotation is being transformed')
-    # transformation
+
     ori_anno = COCO(original_path)
     img_ids = ori_anno.getImgIds()
     cat_ids = ori_anno.getCatIds(catNms=['person'])
