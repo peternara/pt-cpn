@@ -39,13 +39,13 @@ class Mscoco(data.Dataset):
         height, width = self.input_res[0], self.input_res[1]
         add = max(img.shape[0], img.shape[1])
         bimg = cv2.copyMakeBorder(img, add, add, add, add, borderType=cv2.BORDER_CONSTANT,
-                            value=self.pixel_means.reshape(-1))
+                            value=self.pixel_means.tolist())
         bbox = np.array(bbox).reshape(4, ).astype(np.float32)
         objcenter = np.array([bbox[0] + bbox[2] / 2., bbox[1] + bbox[3] / 2.])
         bbox += add         # bbox[:2] += add
         objcenter += add
-        crop_width = bbox[2] * (1 + self.bbox_extend_factor[0] * 2)
-        crop_height = bbox[3] * (1 + self.bbox_extend_factor[1] * 2)
+        crop_width = (bbox[2] - bbox[0]) * (1 + self.bbox_extend_factor[0] * 2)
+        crop_height = (bbox[3] - bbox[1]) * (1 + self.bbox_extend_factor[1] * 2)
 
         if self.is_train:
             joints[:, :2] += add
@@ -86,7 +86,7 @@ class Mscoco(data.Dataset):
             # valid = joints[:, 2].copy()
 
         img = cv2.resize(bimg[min_y:max_y, min_x:max_x, :], (width, height))
-        details = np.asarray([min_x - add, min_y - add, max_x - add, max_y - add])
+        details = np.asarray([min_x - add, min_y - add, max_x - add, max_y - add]).astype(np.float)
 
         if self.is_train:
             return img, joints, details
@@ -207,7 +207,7 @@ class Mscoco(data.Dataset):
         
         meta = {'index': index, 'img_id': item['img_info']['img_id'],
         'bbox': np.array([gt_bbox[0], gt_bbox[1], gt_bbox[2], gt_bbox[3]]),
-        'img_path': img_path, 'augmention_details': details}
+        'img_path': img_path, 'augmentation_details': details}
 
         if self.is_train:
             return img, targets, valid, meta
