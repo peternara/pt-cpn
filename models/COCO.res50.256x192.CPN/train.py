@@ -71,12 +71,11 @@ def main(args):
         logger.append([epoch + 1, lr, train_loss])
 
         # saving
-        if epoch % 5 == 0:
-            save_model({
-                'epoch': epoch + 1,
-                'state_dict': model.state_dict(),
-                'optimizer': optimizer.state_dict(),
-            }, checkpoint=args.checkpoint)
+        save_model({
+            'epoch': epoch + 1,
+            'state_dict': model.state_dict(),
+            'optimizer': optimizer.state_dict(),
+        }, checkpoint=args.checkpoint)
     
     logger.close()
 
