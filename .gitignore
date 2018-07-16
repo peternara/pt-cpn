@@ -18,3 +18,7 @@ utils/__pycache__/misc.cpython-36.pyc
 utils/__pycache__/osutils.cpython-36.pyc
 utils/__pycache__/transforms.cpython-36.pyc
 __pycache__/dataloader.cpython-36.pyc
+cocoapi
+.ipynb_checkpoints/demo1-checkpoint.ipynb
+models/COCO.res50.256x192.CPN/demo2.ipynb
+models/COCO.res50.256x192.CPN/.ipynb_checkpoints/demo2-checkpoint.ipynb
