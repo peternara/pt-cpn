@@ -108,8 +108,6 @@ def train(train_loader, model, criterions, optimizer):
         refine_target_var = torch.autograd.Variable(target7.cuda(async=True))
         valid_var = torch.autograd.Variable(valid.cuda(async=True))
 
-        print(valid_var.size())
-
         # compute output
         global_outputs, refine_output = model(input_var)
         score_map = refine_output.data.cpu()
