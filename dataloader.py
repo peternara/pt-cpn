@@ -41,7 +41,7 @@ class Mscoco(data.Dataset):
         bimg = cv2.copyMakeBorder(img, add, add, add, add, borderType=cv2.BORDER_CONSTANT,
                             value=self.pixel_means.tolist())
         bbox = np.array(bbox).reshape(4, ).astype(np.float32)
-        objcenter = np.array([bbox[0] + bbox[2] / 2., bbox[1] + bbox[3] / 2.])
+        objcenter = np.array([(bbox[0] + bbox[2]) / 2., (bbox[1] + bbox[3]) / 2.])
         bbox += add         # bbox[:2] += add
         objcenter += add
         crop_width = (bbox[2] - bbox[0]) * (1 + self.bbox_extend_factor[0] * 2)
@@ -107,7 +107,7 @@ class Mscoco(data.Dataset):
                 int(center[0] - halfl_w): int(center[0] + halfl_w + 1)], (height, width))
 
         for i in range(num):
-            label[i][0] = (label[i][0] - center[0]) / halfl_w * (width - center[0])+ center[0]
+            label[i][0] = (label[i][0] - center[0]) / halfl_w * (width - center[0]) + center[0]
             label[i][1] = (label[i][1] - center[1]) / halfl_h * (height - center[1]) + center[1]
             label[i][2] *= (
                 (label[i][0] >= 0) & (label[i][0] < width) & (label[i][1] >= 0) & (label[i][1] < height))
@@ -132,7 +132,7 @@ class Mscoco(data.Dataset):
                 allc.append(cod[i][2])
             label = np.array(allc).reshape(num, 3)
         
-        # rorated augmentation
+        # rotated augmentation
         if operation > 1:      
             angle = random.uniform(0, self.rot_factor)
             if random.randint(0, 1):
