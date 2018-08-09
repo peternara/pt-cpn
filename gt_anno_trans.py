@@ -48,6 +48,7 @@ def anno_transform(original, target, is_val):
 
             datum['img_info'] = img_info
             datum['input'] = inp
+            datum['area'] = anno['area']
 
             if is_val == False:
                 for i in range(4):

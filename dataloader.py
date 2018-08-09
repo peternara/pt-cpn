@@ -170,6 +170,9 @@ class Mscoco(data.Dataset):
         if self.is_train:
             image, points, details = self.image_cropping(image, gt_bbox, points)
         else:
+            # blur the image
+            image = scipy.misc.imresize(image, 0.5)
+            image = scipy.misc.imresize(image, 2.0)
             image, details = self.image_cropping(image, gt_bbox)
         
         if self.is_train:
