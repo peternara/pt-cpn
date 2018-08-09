@@ -22,3 +22,5 @@ cocoapi
 .ipynb_checkpoints/demo1-checkpoint.ipynb
 models/COCO.res50.256x192.CPN/demo2.ipynb
 models/COCO.res50.256x192.CPN/.ipynb_checkpoints/demo2-checkpoint.ipynb
+cocoapi
+demo1.ipynb
