@@ -173,7 +173,7 @@ class Mscoco(data.Dataset):
             # blur the image
             t = 32
             if item['area'] > t**2:
-                s = item['area'] / t
+                s = item['area'] / t**2
                 image = scipy.misc.imresize(image, 1 / np.sqrt(s))
                 image = scipy.misc.imresize(image, np.sqrt(s))
             image, details = self.image_cropping(image, gt_bbox)
